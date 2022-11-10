@@ -1,8 +1,11 @@
+import { useHistory } from "react-router-dom";
+
 import NewMeetupForm from "../components/meetups/NewMeetupForm";
 
 function NewMeetupPage() {
+  const history =  useHistory();
   function addMeetupHandler(meetupData){
-    fetch('https://react-getting-started-4d548-default-rtdb.firebaseio.com/meetups.json' ,
+    fetch('https://react-getting-started-4d548-default-rtdb.firebaseio.com/meetups.json' , //firebase url to send a api request
     {
       method: 'POST',
       body: JSON.stringify(meetupData),
@@ -10,7 +13,9 @@ function NewMeetupPage() {
         'Content-Type': 'application/json'
       }
     }
-    ); //firebase url to send a api request
+    ).then(() => {
+      history.replace('/')
+    }); 
 
   }
 
